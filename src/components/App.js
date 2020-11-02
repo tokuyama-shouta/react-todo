@@ -1,17 +1,24 @@
 
 import React from 'react'
+import Form from './Form'
+import Todo from './Todo'
+
+let currentId = 0;
 
 
 //クラスコンポーネント
 class App extends React.Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      todos: []
+    }
+  }
   render() {
       return (
         <div>
-
-          <form>
-            <input type="text"/>
-            <button>追加</button>
-          </form>
+          <Form onSubmit={this.handleSubmit}/>
 
           <label>
             <input type="checkbox"/>
@@ -25,36 +32,24 @@ class App extends React.Component{
           </select>
 
           <ul>
-            <li>
-              <label>
-                <input type="checkbox"/>
-                洗濯する
-              </label>
-              <button>編集</button>
-              <button>消去</button>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox"/>
-                宿題する
-              </label>
-              <button>編集</button>
-              <button>消去</button>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox"/>
-                腹筋する
-              </label>
-              <button>編集</button>
-              <button>消去</button>
-            </li>
+            {this.state.todos.map(({ id,text }) => <li key={id}><Todo text={text}/></li>)}
           </ul>
 
           <button>完了済みを全て消去</button>
 
         </div>
       )
+  }
+
+  handleSubmit = text => {
+    const newTodo = {
+      id: currentId,
+      text,
+    }
+    const newTodos = [...this.state.todos,newTodo]
+    //1つ1つ取り出して新しい配列に追加していく
+    this.setState({ todos: newTodos})
+    currentId++;
   }
 }
 
