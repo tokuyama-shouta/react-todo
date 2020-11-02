@@ -6,7 +6,7 @@ class CheckAll extends React.Component {
     return (
         <label>
             <input type="checkbox" checked={allCompleted} onChange={this.handleChange}/>
-            全て{allCompleted ? "未完了" : "完了"}完了にする
+            全て{allCompleted ? "未完了" : "完了"}にする
         </label>
     )
   }

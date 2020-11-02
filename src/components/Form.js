@@ -28,8 +28,8 @@ class Form extends React.Component {
     //初期からある挙動を止める
     //ページ繊維をなくす
     e.preventDefault();
+    if(!this.state.input) return;
     this.props.onSubmit(this.state.input)
-    console.log(this.state.input)
     this.setState({ input:""})
   };
 }
